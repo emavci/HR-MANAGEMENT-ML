@@ -1,0 +1,175 @@
+﻿@model IK.Application.DTOs.Gnl_LeaveDto
+@{
+    ViewData["Title"] = "İzin Ekle";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DarkLayout.cshtml";
+}
+
+<link href="~/assets/css/demo_1/customtab.css" rel="stylesheet" />
+<div class="tab-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body" style="padding:1rem 1rem 0.5rem 1rem">
+                    <h4 class="card-title" style="margin-bottom:0">
+                        İzin Ekle
+                        @if (Model != null)
+                        {
+                            <span class="badge badge-secondary mb-1 ml-2">@Model.Id</span>
+                        }
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<form action="/PersonLeave/AddLeave" method="post">*@
+<form class="vftBaseForm" data-ajax="true" data-ajax-method="POST"
+      data-ajax-success="successForm" data-ajax-begin="beginForm"
+      data-ajax-complete="completeForm" data-ajax-failure="failureForm"
+      enctype="multipart/form-data"
+      form-add-url="/PersonLeave/AddLeave"
+      form-update-url="/Fleet/Currents/CustomerCurrent/UpdateRetailCustomer"
+      form-delete-url="/Fleet/Currents/CustomerCurrent/DeleteRetailCustomer"
+      form-newContent-url="/Fleet/Currents/CustomerCurrent/NewContentRetail">
+    <div class="row">
+        <div class="col-sm-12 ">
+            <div class="tab-content @Html.Raw(Model == null ? "" : "py-3 px-3") px-sm-0" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
+                    <div class="row">
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <center><h5 class="card-subtitle mb-2 text-muted" >@ViewBag.Name</h5></center>
+                                    <input type="hidden" class="form-control" asp-for="@Model.PersonID" value="@ViewBag.PersonId">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group row">
+                                                <label for="CorporateCustomer_CityId" class="col-sm-3 col-form-label">İzin Tipi</label>
+                                                <div class="col-sm-9">
+                                                    <select asp-for="@Model.SysLeaveTypeID" asp-items="@(new SelectList(ViewBag.InitData, "Id", "Title"))"
+                                                            style="width:100%" class="col-sm-12 select2-single form-control">
+                                                    <option>---</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-6">
+                                                    <input type="datetime-local" class="form-control" asp-for="@Model.StartAt">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <input type="datetime-local" class="form-control" asp-for="@Model.EndAt">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <label class="col-sm-12 file">
+                                                        <input type="file" id="file" aria-label="File browser example" name="file" onchange="dosyaAdiniGoster(this)">
+                                                        <span class="file-custom"></span>
+                                                    </label>
+                                                    <div id="dosyaAdiAlan"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Açıklama:</label>
+                                                <div class="col-sm-9">
+                                                    <textarea type="text" class="form-control" cols="100" rows="3" asp-for="@Model.Note"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row mt-3">
+        @await Html.PartialAsync("~/Views/PartialViews/_PartialBaseButtons.cshtml", (Model == null) ? "SAVE" : "UPDATE")
+    </div>
+
+                        </div>
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div id="calendar"></div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+
+</form>
+
+
+<input type="hidden" id="addMessage" value="kaydını eklemek istediğinize emin misiniz?" />
+<input type="hidden" id="updateMessage" value=" kaydını güncellemek istediğinize emin misiniz?" />
+<input type="hidden" id="deleteMessage" value="kaydını silmek istediğinize emin misiniz?" />
+<input type="hidden" id="saveFileMessage" value=" dosya kaydetmek istediğinize emin misiniz?" />
+<input type="hidden" id="clearMessage" value="Verileri silmek istediğinize emin misiniz?" />
+<input type="hidden" id="saveContactInfo" value="iletişim bilgilerini kaydetmek istediğinize emin misiniz?" />
+
+
+@section Scripts{
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+<script>
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                events: [
+                    {
+                        title: 'İşaretlenmiş Aralık',
+                        start: '2023-05-15',
+                        end: '2023-05-20',
+                        rendering: 'background',
+                        backgroundColor: 'red'
+                    },
+                    {
+                        title: 'Diğer Etkinlik',
+                        start: '2023-05-25',
+                        end: '2023-05-28'
+                    }
+                ]
+            });
+        });
+    function dosyaAdiniGoster(input) {
+        var dosyaAdi = input.files[0].name;
+        document.getElementById("dosyaAdiAlan").innerText = "Seçilen dosya: " + dosyaAdi;
+    }
+    function successForm(successRes) {
+        if (successRes.Data == null) {
+            window.location.href = window.location.origin + successRes.NewUrl;
+            return;
+        }
+
+        SuccessResponseNotify(successRes.Message);
+        PopulateForm('.vftBaseForm', successRes.Data);
+        $("#VehicleInsuranceInfo_VehicleId").val(successRes.Data.Id);
+
+        if (successRes.PageRefresh) {
+            changePageStatusToUpdate(successRes.Data.PlateNumber, `${window.location.href}/Index/${successRes.Data.Id}`);
+        }
+        HideLoader();
+    }
+        $(document).ready(function () {
+            $('#calendar1').fullCalendar({
+                defaultView: 'multiYear',
+                views: {
+                    multiYear: {
+                        type: 'multiYear',
+                        duration: { years: 1 },
+                        buttonText: '12 Months',
+                        titleFormat: 'MMMM YYYY',
+                        monthColumns: 3
+                    }
+                },
+                events: [
+                    // Etkinlikler burada tanımlanacak
+                ]
+            });
+        });
+</script>
+
+}

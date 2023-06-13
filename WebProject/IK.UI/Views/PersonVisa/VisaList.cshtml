@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Personel Vize";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DarkLayout.cshtml";
+}
+
+<h1 id="headerId">İnsan Kaynakları / Personel Vize</h1>
+<h1 id="heid"></h1>
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-11 text-center">
+                        <h4 class="text-center" id="tableHeaderId"></h4>
+                    </div>
+                    <div class="col-md-1 text-right" id="showFilterArea">
+                        <i data-feather="filter" class="text-right" id="showFilterArea"></i>
+                        <button class="btn" onclick="redirectPage()"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive col">
+                        <table id="personelVisaListTable" class="table vftDataTable">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/assets/js/CurrentGeneral/baseCurrentPages.js"></script>
+    <script src="~/assets/js/CurrentLists/PersonelVisa.js"></script>
+    <script>
+
+    </script>
+  }

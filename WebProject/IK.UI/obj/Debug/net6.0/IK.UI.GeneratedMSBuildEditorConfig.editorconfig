@@ -1,0 +1,100 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = IK.UI
+build_property.RootNamespace = IK.UI
+build_property.ProjectDir = C:\Users\Emir\source\repos\IK\IK.UI\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Emir\source\repos\IK\IK.UI
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/LossGuess/PersonelList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9zc0d1ZXNzXFBlcnNvbmVsTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/PartialViews/_PartialBaseButtons.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydGlhbFZpZXdzXF9QYXJ0aWFsQmFzZUJ1dHRvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/PartialViews/_PartialCurrentMailAddress.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydGlhbFZpZXdzXF9QYXJ0aWFsQ3VycmVudE1haWxBZGRyZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/PartialViews/_PartialCurrentTelNumber.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydGlhbFZpZXdzXF9QYXJ0aWFsQ3VycmVudFRlbE51bWJlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/PersonFile/FileList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uRmlsZVxGaWxlTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/PersonLeave/Leave.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uTGVhdmVcTGVhdmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/PersonLeave/LeaveCalendar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uTGVhdmVcTGVhdmVDYWxlbmRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/PersonLeave/LeaveList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uTGVhdmVcTGVhdmVMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/PersonLeave/LeaveRequest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uTGVhdmVcTGVhdmVSZXF1ZXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/PersonVisa/VisaList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uVmlzYVxWaXNhTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/Person/Personel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uXFBlcnNvbmVsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/Person/PersonelList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyc29uXFBlcnNvbmVsTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/Shared/_DarkLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9EYXJrTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Emir/source/repos/IK/IK.UI/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-433pauo7e9

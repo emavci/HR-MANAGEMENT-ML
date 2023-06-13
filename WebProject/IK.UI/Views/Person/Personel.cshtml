@@ -1,0 +1,407 @@
+﻿@using IK.Application.DTOs
+@model IK.Application.ViewModels.PersonViewModel
+@{
+    ViewData["Title"] = "Personel Ekle";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DarkLayout.cshtml";
+}
+<link href="~/assets/css/demo_1/customtab.css" rel="stylesheet" />
+<div class="tab-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body" style="padding:1rem 1rem 0.5rem 1rem">
+                    <h4 class="card-title" style="margin-bottom:0">
+                        Personel Kayıt
+                        @if (Model != null)
+                        {
+                            <span class="badge badge-secondary mb-1 ml-2">@Model.Personel.Name</span>
+                            <input type="hidden" asp-for="@Model.Personel.Id" value="123" />
+                        }
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form class="vftBaseForm" data-ajax="true" data-ajax-method="POST"
+      data-ajax-success="successForm" data-ajax-begin="beginForm"
+      data-ajax-complete="completeForm" data-ajax-failure="failureForm"
+      form-add-url="/Person/AddPerson"
+      form-update-url="/Person/UpdatePerson"
+      form-delete-url="/Fleet/Currents/CustomerCurrent/DeleteRetailCustomer"
+      form-newContent-url="/Fleet/Currents/CustomerCurrent/NewContentRetail">
+       <input type="hidden" asp-for="@Model.Personel.Id">
+       <input type="hidden" asp-for="@Model.PersonelCard.Id">
+       <input type="hidden" asp-for="@Model.User.Id">
+    <input type="hidden" asp-for="@Model.PersonPassaport.Id">
+    <div class="row">
+        <div class="col-sm-12 ">
+            <nav style="display:@Html.Raw(Model != null ? "block" : "block")">
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-main-tab" data-toggle="tab" href="#nav-main" role="tab" aria-controls="nav-main" aria-selected="true">Ana Bilgiler</a>
+                    <a class="nav-item nav-link" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">Kullanıcı Bilgileri</a>
+                    <a class="nav-item nav-link" id="nav-identity-tab" data-toggle="tab" href="#nav-identity" role="tab" aria-controls="nav-identity" aria-selected="true">Kimlik Bilgileri</a>
+                    <a class="nav-item nav-link" id="nav-personal-tab" data-toggle="tab" href="#nav-personal" role="tab" aria-controls="nav-personal" aria-selected="true">Kişisel Bilgiler</a>
+                    <a class="nav-item nav-link" id="nav-pasaport-tab" data-toggle="tab" href="#nav-pasaport" role="tab" aria-controls="nav-pasaport" aria-selected="true">Pasaport Bilgileri</a>
+                    <a class="nav-item nav-link" id="nav-connect-tab" data-toggle="tab" href="#nav-connect" role="tab" aria-controls="nav-connect" aria-selected="true">İletişim Bilgileri</a>
+                    <a class="nav-item nav-link" id="nav-education-tab" data-toggle="tab" href="#nav-education" role="tab" aria-controls="nav-education" aria-selected="true">Eğitim Bilgileri</a>
+                    <a class="nav-item nav-link" id="nav-file-tab" data-toggle="tab" href="#nav-file" role="tab" aria-controls="nav-file" aria-selected="true">Dosya 
+Bilgileri</a>
+                </div>
+            </nav>
+            <d iv class="tab-content @Html.Raw(Model == null ? "" : "py-3 px-3") px-sm-0" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-main" role="tabpanel" aria-labelledby="nav-main-tab">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Ad Soyad</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="@Model.Personel.Name" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Giriş Tarihi</label>
+                                                <div class="col-sm-8">
+                                                    <input type="datetime-local" class="form-control" asp-for="@Model.PersonelCard.EnteredAt">
+                                                </div>
+                                            </div>
+
+                                                                                        <div class="form-group row">
+                                                <label for="CorporateCustomer_CityId" class="col-sm-3 col-form-label">Şirket</label>
+                                                <div class="col-sm-8">
+                                                    <select asp-for="PersonelCard.SysCompanyID" asp-items="@(new SelectList(ViewBag.InitData.Companies, "Id", "Title"))" style="width:100%" class="select2-single form-control">
+                                                        <option>---</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+
+                                            <div class="form-group row">
+                                                <label for="CorporateCustomer_CityId" class="col-sm-3 col-form-label">Tip</label>
+                                                <div class="col-sm-8">
+                                                    <select asp-for="Personel.PersonTypeID" asp-items="@(new SelectList(ViewBag.InitData.PersonType, "Id", "Title"))" style="width:100%" class="select2-single form-control">
+                                                        <option>---</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Çıkış Tarihi</label>
+                                                <div class="col-sm-8">
+                                                    <input type="datetime-local" class="form-control" asp-for="@Model.PersonelCard.ExitedAt">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="form-group row">
+                                                <label for="CorporateCustomer_CityId" class="col-sm-3 col-form-label">Pozisyon</label>
+                                                <div class="col-sm-8">
+                                                    <select asp-for="PersonelPosition[0].SysPositionID" asp-items="@(new SelectList(ViewBag.InitData.Positions, "Id", "Title"))" style="width:100%" class="select2-single form-control">
+                                                        <option>---</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="nav-user" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-user-tab">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Kullanıcı Ad</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="User.Username">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Şifre</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="User.Password">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="nav-identity" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-identity-tab">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Kimlik Numarası</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="@Model.PersonelCard.Serial_No">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Anne Adı</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.MothersName">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Baba Adı</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.FathersName">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Doğum Tarihi</label>
+                                                <div class="col-sm-8">
+                                                    <input type="datetime-local" class="form-control" asp-for="PersonelCard.BirthDate">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Kişi Uyruğu</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.Nationality">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Cinsiyet</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.Gender">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Bitiş Tarihi</label>
+                                                <div class="col-sm-8">
+                                                    <input type="datetime-local" class="form-control" asp-for="PersonelCard.ExitedAt">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="nav-personal" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-personal-tab">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Doğum Yeri</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.BirthPlace">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Sürücü Belgesi</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.DriverLicense">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Askerlik</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.MilitaryStatus">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Boy</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.Height">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Kilo</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.Weight">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Beden</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.Body">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Ayakkabı Numarası</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonelCard.FootNumber">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="nav-pasaport" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-pasaport-tab">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Pasaport Numarası</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonPassaport.code">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Pasaport Ülke Kodu</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonPassaport.country">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Alınış Tarihi</label>
+                                                <div class="col-sm-8">
+                                                    <input type="datetime-local" class="form-control" asp-for="PersonPassaport.startAt">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Pasaport Tip</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonPassaport.type">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Kişi Uyruğu</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" asp-for="PersonPassaport.nation">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="RetailCustomer_Name" class="col-sm-3 col-form-label">Bitiş Tarihi</label>
+                                                <div class="col-sm-8">
+                                                    <input type="datetime-local" class="form-control" asp-for="PersonPassaport.endAt">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="nav-connect" class="tab-pane fade" role="tabpanel" aria-labelledby="nav-connect-tab">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                                                    @if (Model == null)
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <p>Önce firmanın genel bilgilerini kaydetmelisiniz.</p>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                        <div class="row">
+                                            <div class="col-sm-5">
+@*                                                @await Html.PartialAsync("~/Views/PartialViews/_PartialCurrentMailAddress.cshtml", (List<Sys_SocialDto>)(ViewData["InitData"] as CurrentBaseInitDataDto).Socials)*@
+                                            </div>
+                                            <div class="col-sm-1">
+                                            </div>
+                                            <div class="col-sm-5">
+                                                @*                                                @await Html.PartialAsync("~/Views/PartialViews/_PartialCurrentTelNumber.cshtml")
+                                            *@
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-sm-2 offset-sm-10">
+                                                <button id="btnSaveContactInfo" data-current-type-id='' type="submit" class="btn btn-success btn-block btn-icon-text">
+                                                    <i class="btn-icon-prepend" data-feather="save"></i>
+                                                    Kaydet
+                                                </button>
+                                            </div>
+                                        </div>
+                                }
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </d>
+        </div>
+    </div>
+
+
+    <div class="row mt-3">
+        @await Html.PartialAsync("~/Views/PartialViews/_PartialBaseButtons.cshtml", (Model == null) ? "SAVE" : "UPDATE")
+    </div>
+</form>
+
+
+<input type="hidden" id="addMessage" value="kaydı eklemek istediğinize emin misiniz?" />
+<input type="hidden" id="updateMessage" value="kaydı güncellemek istediğinize emin misiniz?" />
+<input type="hidden" id="deleteMessage" value="kaydı silmek istediğinize emin misiniz?" />
+<input type="hidden" id="saveFileMessage" value="dosya kaydetmek istediğinize emin misiniz?" />
+<input type="hidden" id="clearMessage" value="Verileri silmek istediğinize emin misiniz?" />
+<input type="hidden" id="saveContactInfo" value="iletişim bilgilerini kaydetmek istediğinize emin misiniz?" />
+
+
+
+    <script>
+
+        function successForm(successRes) {
+            if (successRes.Data == null) {
+                window.location.href = window.location.origin + successRes.NewUrl;
+                return;
+            }
+
+            SuccessResponseNotify(successRes.Message);
+            PopulateForm('.vftBaseForm', successRes.Data);
+            $("#VehicleInsuranceInfo_VehicleId").val(successRes.Data.Id);
+
+            if (successRes.PageRefresh) {
+                changePageStatusToUpdate(successRes.Data.PlateNumber, `${window.location.href}/Index/${successRes.Data.Id}`);
+            }
+            HideLoader();
+        }
+    </script>
+

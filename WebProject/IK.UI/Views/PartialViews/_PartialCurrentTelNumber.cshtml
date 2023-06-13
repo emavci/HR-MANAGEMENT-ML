@@ -1,0 +1,218 @@
+﻿@using IK.Application.DTOs
+@model List<Sys_PersonDto>
+
+<div class="form-group row mb-3">
+    <input type="hidden" value="0" id="ctTelId">
+    <div class="col-sm-4">
+        <div class="row">
+            <label for="ctTelNumber" class="col-sm-12 col-form-label">Telefon Numarası</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input class="form-control" data-inputmask-alias="+(999) 999-9999" id="ctTelNumber">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="row">
+            <label for="ctTelDescription" class="col-sm-12 col-form-label">Açıklama</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input class="form-control" id="ctTelDescription">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="row">
+            <label class="col-sm-12 col-form-label">&nbsp;</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="btn btn-primary" id="btnAddOrUpdateTel">Ekle</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="row">
+            <label class="col-sm-12 col-form-label">&nbsp;</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="btn btn-secondary" id="btnClearTelAddForm">Temizle</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row mb-2">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>Telefon Numarası Listesi</h5>
+                <table class="table" id="tblTelList">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Telefon Numarası</th>
+                            <th>Açıklama</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>@Model[i].Id</td>
+@*                                <td>@Model[i].TelNumber</td>
+                                <td>@Model[i].Description</td>*@
+                                <td><span class="btn btn-success" id="btnUpdateTel_@i">Güncelle</span></td>
+                                <td><span class="btn btn-danger" id="btnDeleteTel_@i">Sil</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/vendors/core/core.js"></script>
+
+<script type="text/javascript">
+    var telList = [];
+    var telAddOrUpdateBtnType = "";
+    var telWillUpdateElement = "";
+
+    $(document).ready(function () {
+        telList = [];
+        telAddOrUpdateBtnType = "ADD";
+        GetTelTableData();
+
+    });
+
+    $("#btnAddOrUpdateTel").on("click", function () {
+
+        let tel = $("#ctTelNumber").val();
+
+        if ((!tel || tel.length === 0)) {
+            ErrorResponseNotify("Telefon numarası boş geçilemez.");
+            return;
+        }
+
+        if (telAddOrUpdateBtnType == "ADD") {
+            AddTelInfoToTelList();
+            UpdateTelTableData();
+            ClearTelOpForm();
+        }
+        else if (telAddOrUpdateBtnType == "UPDATE") {
+            UpdateTelInTelList();
+            UpdateTelTableData();
+            ClearTelOpForm();
+            SetTelFormToAdd();
+        }
+    });
+
+    $("#btnClearTelAddForm").on("click", function () {
+        ClearTelOpForm();
+        SetTelFormToAdd();
+    });
+
+    $(document).on("click", "[id^=btnUpdateTel]", function () {
+        let tableRowId = $(this).attr("id");
+        let index = tableRowId.split('_')[1];
+        SetFormElementsFromTelList(index);
+        SetTelFormToUpdate(tableRowId);
+        UpdateTelTableData();
+    });
+
+    $(document).on("click", "[id^=btnDeleteTel]", function () {
+        let index = $(this).attr("id").split('_')[1];
+        let message = 'Seçili telefon numarasını silmek istediğinize emin misiniz?';
+        AreYouSure(message, function (isConfirm) {
+            if (isConfirm) {
+                telList.splice(index, 1);
+                UpdateTelTableData();
+                SetTelFormToAdd();
+                ClearTelOpForm();
+            }
+        });
+    });
+
+    function UpdateTelTableData() {
+        document.getElementById("tblTelList").getElementsByTagName('tbody')[0].innerHTML = "";
+        var table = document.getElementById("tblTelList").getElementsByTagName('tbody')[0];
+        telList.forEach(function (element, index) {
+            let row = table.insertRow();
+            row.insertCell(0).innerHTML = element.Id;
+            row.insertCell(1).innerHTML = element.TelNumber;
+            row.insertCell(2).innerHTML = element.Description;
+            row.insertCell(3).innerHTML = '<button class="btn btn-success" id="btnUpdateTel_' + index + '">Güncelle</button>';
+            row.insertCell(4).innerHTML = '<span class="btn btn-danger" id="btnDeleteTel_' + index + '">Sil</span>';
+        });
+    }
+
+    function GetTelTableData() {
+        var table = document.getElementById('tblTelList');
+        for (var i = 1, row; row = table.rows[i]; i++) {
+            var col = row.cells;
+            telList.push({
+                Id: col[0].innerHTML,
+                CurrentId: parseInt($("#btnSaveContactInfo").attr("data-current-id")),
+                CurrentTypeId: parseInt($("#btnSaveContactInfo").attr("data-current-type-id")),
+                TelNumber: col[1].innerHTML,
+                Description: col[2].innerHTML
+            });
+        }
+    }
+
+    function SetTelFormToAdd() {
+        $("#btnAddOrUpdateTel").removeClass("btn-info");
+        $("#btnAddOrUpdateTel").addClass("btn-primary");
+        $("#btnAddOrUpdateTel").text("Ekle");
+        telAddOrUpdateBtnType = "ADD";
+        telWillUpdateElement = "";
+    }
+
+    function SetTelFormToUpdate(tableRowId) {
+        $("#btnAddOrUpdateTel").removeClass("btn-primary");
+        $("#btnAddOrUpdateTel").addClass("btn-info");
+        $("#btnAddOrUpdateTel").text("Güncelle");
+        telAddOrUpdateBtnType = "UPDATE";
+        telWillUpdateElement = tableRowId;
+    }
+
+    function UpdateTelInTelList() {
+        let index = telWillUpdateElement.split('_')[1];
+        telList[index].Id = parseInt($("#ctTelId").val());
+        telList[index].TelNumber = $("#ctTelNumber").val();
+        telList[index].Description = $("#ctTelDescription").val();
+    }
+
+    function AddTelInfoToTelList() {
+        let id = parseInt($("#ctTelId").val());
+        let tel = $("#ctTelNumber").val();
+        let desc = $("#ctTelDescription").val();
+        telList.push({
+            Id: id,
+            CurrentId: parseInt($("#btnSaveContactInfo").attr("data-current-id")),
+            CurrentTypeId: parseInt($("#btnSaveContactInfo").attr("data-current-type-id")),
+            TelNumber: tel,
+            Description: desc
+        });
+    }
+
+    function SetFormElementsFromTelList(index) {
+        $("#ctTelId").val(telList[index].Id);
+        $("#ctTelNumber").val(telList[index].TelNumber);
+        $("#ctTelDescription").val(telList[index].Description);
+    }
+
+    function ClearTelOpForm() {
+        $("#ctTelId").val("0");
+        $("#ctTelNumber").val("");
+        $("#ctTelDescription").val("");
+    }
+</script>
+
+

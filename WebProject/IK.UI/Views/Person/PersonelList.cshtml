@@ -1,0 +1,144 @@
+﻿@{
+    ViewData["Title"] = "Personel Listesi";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DarkLayout.cshtml";
+}
+
+
+
+
+<h1 id="headerId">İnsan Kaynakları / </h1>
+
+<div class="row mb-2" id="filterArea" style="display:none">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group row">
+                                <label for="filterName" class="col-sm-3 col-form-label">Adı</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="filterName" placeholder="Adı">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="filterSurname" class="col-sm-3 col-form-label">Soyadı</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="filterSurname" placeholder="Soyadı">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group row">
+                                <label for="CityId" class="col-sm-3 col-form-label">Departman</label>
+                                <div class="col-sm-9">
+@*                                    <select id="Id" asp-items="@(new SelectList( ViewBag.InitData.Personel, "Id", "Value"))" style="width:100%" class="select2-single form-control">
+                                        <option value="">---</option>
+                                    </select>*@
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="DistrictId" class="col-sm-3 col-form-label">Pozisyon</label>
+                                <div class="col-sm-9">
+@*                                    <select id="DistrictId" data-select-mode="1" asp-items="@(new SelectList( ViewBag.InitData.Districts, "Id", "Name"))" style="width:100%" class="select2-single form-control">
+                                        <option value="">---</option>
+                                    </select>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group row">
+                                <label for="filterTaxNo" class="col-sm-3 col-form-label">Giriş</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="filterTaxNo" placeholder="Giriş">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="IsActive" class="col-sm-3 col-form-label">Durum</label>
+                                <div class="col-sm-9">
+                                    <select id="IsActive" style="width:100%" class="select2-single form-control IsActive">
+                                        <option value="Active">AKTİF</option>
+                                        <option value="Passive">PASİF</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="row mt-0">
+                                <div class="col-sm-12">
+                                    <button type="button" id="btnSearch" class="btn btn-success btn-block">Sorgula</button>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-sm-12">
+                                    <button type="button" id="btnClearFilter" class="btn btn-secondary btn-block">Temizle</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-1 text-left">
+                        <button class="btn" onclick="redirectPage()"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="col-md-10 text-center">
+                        <h4 class="text-center" id="tableHeaderId"></h4>
+                    </div>
+                    <div class="col-md-1 text-right" id="showFilterArea">
+                        <i data-feather="filter" class="text-right" id="showFilterArea"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive col">
+                        <table id="retailCustomerListTable" class="table vftDataTable">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+@*
+    <a onclick="redirectPage()" class="btn btn-info">Yeni Kişi</a>
+*@
+@section Scripts{
+    <script src="~/assets/js/CurrentGeneral/baseCurrentPages.js"></script>
+    <script src="~/assets/js/CurrentLists/PersonelList.js"></script>
+<script>
+const params = new URLSearchParams(document.location.search);
+const s = params.get("typeId");
+        if (s == 1) {
+         document.getElementById("headerId").innerHTML = "İnsan Kaynakları / Personel Listesi"
+         document.getElementById("tableHeaderId").innerHTML = "Personel Listesi"
+
+        }
+        if (s == 2) {
+            document.getElementById("headerId").innerHTML = "İnsan Kaynakları / Müşteri Listesi"
+            document.getElementById("tableHeaderId").innerHTML = "Müşteri Listesi"
+        }
+        if (s == 3) {
+            document.getElementById("headerId").innerHTML = "İnsan Kaynakları / Tedarikçi Listesi"
+            document.getElementById("tableHeaderId").innerHTML = "Tedarikçi Listesi"
+        }
+
+function redirectPage() { 
+
+if(s != null){
+window.location.href = '/Person/Personel?typeId=' + s;
+}
+}
+
+        </script>
+  }

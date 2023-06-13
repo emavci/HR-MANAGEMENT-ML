@@ -1,0 +1,50 @@
+﻿@model IK.Application.DTOs.Gnl_LeaveDto
+@{
+    ViewData["Title"] = "İzin Takvimi";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DarkLayout.cshtml";
+}
+<span class="badge badge-secondary mb-1 ml-2">Takvim</span>
+<div id="calendar"></div>
+@section Scripts{
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css' rel='stylesheet' />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js'></script>
+    <script>
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                defaultView: 'multiYear',
+                events: [
+                    {
+                        title: 'İşaretlenmiş Aralık',
+                        start: '2023-05-15',
+                        end: '2023-05-20',
+                        rendering: 'background',
+                        backgroundColor: 'red'
+                    },
+                    {
+                        title: 'Diğer Etkinlik',
+                        start: '2023-05-25',
+                        end: '2023-05-28'
+                    }
+                ]
+            });
+        });
+        $(document).ready(function () {
+            $('#calendar1').fullCalendar({
+                views: {
+                    multiYear: {
+                        type: 'multiYear',
+                        duration: { years: 1 },
+                        buttonText: '12 Months',
+                        titleFormat: 'MMMM YYYY',
+                        monthColumns: 3
+                    }
+                },
+                events: [
+                    // Etkinlikler burada tanımlanacak
+                ]
+            });
+        });
+    </script>
+
+}

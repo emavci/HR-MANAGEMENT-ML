@@ -1,0 +1,38 @@
+﻿@model string
+
+@if (Model == "SAVE")
+{
+    <div class="col-sm-2 offset-sm-8">
+        <button id="btnClear" class="btn btn-dark btn-block btn-icon-text">
+            <i class="btn-icon-prepend" data-feather="refresh-ccw"></i>
+            Temizle
+        </button>
+    </div>
+    <div class="col-sm-2">
+        <button id="btnAdd" type="submit" class="btn btn-success btn-block btn-icon-text">
+            <i class="btn-icon-prepend" data-feather="save"></i>
+            Kaydet
+        </button>
+    </div>
+}
+else if (Model == "UPDATE")
+{
+    <div class="col-sm-2 offset-sm-6">
+        <button id="btnNewContent" class="btn btn-dark btn-block btn-icon-text">
+            <i class="btn-icon-prepend" data-feather="refresh-ccw"></i>
+            Yeni Kayıt
+        </button>
+    </div>
+    <div class="col-sm-2">
+        <button id="btnDelete" type="submit" class="btn btn-danger btn-block btn-icon-text">
+            <i class="btn-icon-prepend" data-feather="delete"></i>
+            Pasife Al
+        </button>
+    </div>
+    <div class="col-sm-2">
+        <button id="btnUpdate" type="submit" class="btn btn-info btn-block btn-icon-text">
+            <i class="btn-icon-prepend" data-feather="edit-2"></i>
+            Güncelle
+        </button>
+    </div>
+}

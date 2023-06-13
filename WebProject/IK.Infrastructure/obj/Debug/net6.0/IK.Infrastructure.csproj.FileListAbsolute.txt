@@ -1,0 +1,12 @@
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\bin\Debug\net6.0\IK.Infrastructure.deps.json
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\bin\Debug\net6.0\IK.Infrastructure.dll
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\bin\Debug\net6.0\IK.Infrastructure.pdb
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\obj\Debug\net6.0\IK.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\obj\Debug\net6.0\IK.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\obj\Debug\net6.0\IK.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\obj\Debug\net6.0\IK.Infrastructure.AssemblyInfo.cs
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\obj\Debug\net6.0\IK.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\obj\Debug\net6.0\IK.Infrastructure.dll
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\obj\Debug\net6.0\refint\IK.Infrastructure.dll
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\obj\Debug\net6.0\IK.Infrastructure.pdb
+C:\Users\Emir\source\repos\IK\IK.Infrastructure\obj\Debug\net6.0\ref\IK.Infrastructure.dll

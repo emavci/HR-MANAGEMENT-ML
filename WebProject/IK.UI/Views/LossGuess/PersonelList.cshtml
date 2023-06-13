@@ -1,0 +1,154 @@
+﻿@using IK.Application.DTOs
+@model IK.Application.DTOs.totaltahminDto
+@{
+    ViewData["Title"] = "Personel Belgeleri";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DarkLayout.cshtml";
+}
+<head>
+    <title>İzin Zarar Tahmini</title>
+    <style>
+        #content {
+               font-family: Arial, sans-serif;
+               text-align: center;
+           }
+
+        h1.title {
+            font-size: 24px;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        #zararTahmini {
+            font-weight: bold;
+            color: #ff0000;
+            font-size: 32px;
+        }
+
+        .button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .button:hover {
+                background-color: #555;
+            }
+    </style>
+</head>
+
+<div class="row mb-2" >
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group row" id="content">
+                    <div class="col-sm-11">
+                        @if (Model != null){
+                                <div class="row">
+                                    <div class="col-sm-2">
+                                        <h1 class="title">Yıl : <span id="zararTahmini">@Model.Yil</span></h1>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <h1 class="title">İzin Zarar Tahmini : <span id="zararTahmini">@Model.TotalTahmin</span></h1>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h1 class="title">Çalışılmayan Günler : <span id="zararTahmini">@Model.CalisilmayanGunler</span></h1>
+                                    </div>
+                                </div>
+                                <hr class="solid">
+
+
+                        }
+                        else{
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <h1 class="title">Yıl : <span id="zararTahmini">---</span></h1>
+                                </div>
+                                <div class="col-sm-5">
+                                    <h1 class="title">Total İzin Zarar Tahmini : <span id="zararTahmini">---</span></h1>
+                                </div>
+                                <div class="col-sm-4">
+                                    <h1 class="title">Çalışılmayan Günler : <span id="zararTahmini">---</span></h1>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                     <div class="col-sm-1">
+                        <button class="button" onclick="getAPIResponse()">Zararı Güncelle</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<h3 id="headerId">Zarar Tahmini / Kişi Listesi</h3>*@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-11 text-left">
+                        <h4 class="text-left">Zarar Tahmini / Kişi Listesi</h4>
+                    </div>
+
+                    <div class="col-md-1 text-right" id="showFilterArea">
+
+                        <i data-feather="filter" class="text-right" id="showFilterArea"></i>
+                        <button class="btn" onclick="redirectPage()"><i class="fa fa-plus"></i></button>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="table-responsive col">
+                        <table id="lossGuessPersonelList" class="table vftDataTable">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Geçmiş İzinler</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table id="myTable" class="display" style="width:100%">
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/assets/js/CurrentGeneral/baseCurrentPages.js"></script>
+    <script src="~/assets/js/currentlists/lossguesspersonellist.js"></script>
+    <script>
+        function getAPIResponse() {
+            $.ajax({
+                url: "http://127.0.0.1:5000",
+                method: "GET",
+                success: function (data, textStatus, xhr) {
+                    var statusCode = xhr.status;
+                    console.log("Status Code:", statusCode);
+                    location.reload();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("API isteği başarısız oldu. Hata kodu:", xhr.status);
+                }
+            });
+        }
+    </script>
+  }

@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Personel Belgeleri";
+    //Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_DarkLayout.cshtml";
+}
+<h1 id="headerId">İzin Sistem / Kişi Listesi</h1>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-11 text-center">
+                        <h4 class="text-center" id="tableHeaderId"></h4>
+                    </div>
+                    <div class="col-md-1 text-right" id="showFilterArea">
+                        <i data-feather="filter" class="text-right" id="showFilterArea"></i>
+                        <button class="btn" onclick="redirectPage()"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive col">
+                        <table id="leaveListTable" class="table vftDataTable">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Geçmiş İzinler</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table id="myTable" class="display" style="width:100%">
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/assets/js/CurrentGeneral/baseCurrentPages.js"></script>
+    <script src="~/assets/js/CurrentLists/PersonelLeaveList.js"></script>
+    <script>
+
+
+    </script>
+  }

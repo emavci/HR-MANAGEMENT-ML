@@ -1,0 +1,17 @@
+C:\Users\Emir\source\repos\IK\IK.Application\bin\Debug\net6.0\IK.Application.deps.json
+C:\Users\Emir\source\repos\IK\IK.Application\bin\Debug\net6.0\IK.Application.runtimeconfig.json
+C:\Users\Emir\source\repos\IK\IK.Application\bin\Debug\net6.0\IK.Application.dll
+C:\Users\Emir\source\repos\IK\IK.Application\bin\Debug\net6.0\IK.Application.pdb
+C:\Users\Emir\source\repos\IK\IK.Application\bin\Debug\net6.0\IK.Domain.dll
+C:\Users\Emir\source\repos\IK\IK.Application\bin\Debug\net6.0\IK.Domain.pdb
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\IK.Application.csproj.AssemblyReference.cache
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\IK.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\IK.Application.AssemblyInfoInputs.cache
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\IK.Application.AssemblyInfo.cs
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\IK.Application.csproj.CoreCompileInputs.cache
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\IK.Application.csproj.CopyComplete
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\IK.Application.dll
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\refint\IK.Application.dll
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\IK.Application.pdb
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\IK.Application.genruntimeconfig.cache
+C:\Users\Emir\source\repos\IK\IK.Application\obj\Debug\net6.0\ref\IK.Application.dll

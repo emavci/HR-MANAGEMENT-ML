@@ -1,0 +1,215 @@
+﻿@model List<IK.Application.DTOs.Sys_SocialDto>
+<div class="form-group row mb-3">
+    <input type="hidden" value="0" id="ctMailId">
+    <div class="col-sm-4">
+        <div class="row">
+            <label for="ctMailAddress" class="col-sm-12 col-form-label">Mail Adresi</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input class="form-control" data-inputmask="'alias': 'email'" id="ctMailAddress">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="row">
+            <label for="ctMailDescription" class="col-sm-12 col-form-label">Açıklama</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <input class="form-control" id="ctMailDescription">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="row">
+            <label class="col-sm-12 col-form-label">&nbsp;</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="btn btn-primary" id="btnAddOrUpdateMail">Ekle</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="row">
+            <label class="col-sm-12 col-form-label">&nbsp;</label>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="btn btn-secondary" id="btnClearMailAddForm">Temizle</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-group row mb-2">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>Mail Adres Listesi</h5>
+                <table class="table" id="tblMailList">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Mail Adresi</th>
+                            <th>Açıklama</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td>@Model[i].Id</td>
+                                <td>@Model[i].Title</td>
+                                <td>@Model[i].Content</td>
+                                <td><span class="btn btn-success" id="btnUpdateMail_@i">Güncelle</span></td>
+                                <td><span class="btn btn-danger" id="btnDeleteMail_@i">Sil</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/vendors/core/core.js"></script>
+
+<script type="text/javascript">
+    var mailList = [];
+    var mailAddOrUpdateBtnType = "";
+    var mailWillUpdateElement = "";
+
+    $(document).ready(function () {
+        mailList = [];
+        mailAddOrUpdateBtnType = "ADD";
+        GetMailTableData();
+    });
+
+    $("#btnAddOrUpdateMail").on("click", function () {
+
+        let mail = $("#ctMailAddress").val();
+
+        if ((!mail || mail.length === 0)) {
+            ErrorResponseNotify("Mail adresi boş geçilemez.");
+            return;
+        }
+
+        if (mailAddOrUpdateBtnType == "ADD") {
+            AddMailInfoToMailList();
+            UpdateMailTableData();
+            ClearMailOpForm();
+        }
+        else if (mailAddOrUpdateBtnType == "UPDATE") {
+            UpdateMailInMailList();
+            UpdateMailTableData();
+            ClearMailOpForm();
+            SetMailFormToAdd();
+        }
+    });
+
+    $("#btnClearMailAddForm").on("click", function () {
+        ClearMailOpForm();
+        SetMailFormToAdd();
+    });
+
+    $(document).on("click", "[id^=btnUpdateMail]", function () {
+        let tableRowId = $(this).attr("id");
+        let index = tableRowId.split('_')[1];
+        SetFormElementsFromMailList(index);
+        SetMailFormToUpdate(tableRowId);
+        UpdateMailTableData();
+    });
+
+    $(document).on("click", "[id^=btnDeleteMail]", function () {
+        let index = $(this).attr("id").split('_')[1];
+        let message = 'Seçili mail adresini silmek istediğinize emin misiniz?';
+        AreYouSure(message, function (isConfirm) {
+            if (isConfirm) {
+                mailList.splice(index, 1);
+                UpdateMailTableData();
+                SetMailFormToAdd();
+                ClearMailOpForm();
+            }
+        });
+    });
+
+    function UpdateMailTableData() {
+        document.getElementById("tblMailList").getElementsByTagName('tbody')[0].innerHTML = "";
+        var table = document.getElementById("tblMailList").getElementsByTagName('tbody')[0];
+        mailList.forEach(function (element, index) {
+            let row = table.insertRow();
+            row.insertCell(0).innerHTML = element.Id;
+            row.insertCell(1).innerHTML = element.MailAddress;
+            row.insertCell(2).innerHTML = element.Description;
+            row.insertCell(3).innerHTML = '<button class="btn btn-success" id="btnUpdateMail_' + index + '">Güncelle</button>';
+            row.insertCell(4).innerHTML = '<span class="btn btn-danger" id="btnDeleteMail_' + index + '">Sil</span>';
+        });
+    }
+
+    function GetMailTableData() {
+        var table = document.getElementById('tblMailList');
+        for (var i = 1, row; row = table.rows[i]; i++) {
+            var col = row.cells;
+            mailList.push({
+                Id: col[0].innerHTML,
+                CurrentId: parseInt($("#btnSaveContactInfo").attr("data-current-id")),
+                CurrentTypeId: parseInt($("#btnSaveContactInfo").attr("data-current-type-id")),
+                MailAddress: col[1].innerHTML,
+                Description: col[2].innerHTML
+            });
+        }
+    }
+
+    function SetMailFormToAdd() {
+        $("#btnAddOrUpdateMail").removeClass("btn-info");
+        $("#btnAddOrUpdateMail").addClass("btn-primary");
+        $("#btnAddOrUpdateMail").text("Ekle");
+        mailAddOrUpdateBtnType = "ADD";
+        mailWillUpdateElement = "";
+    }
+
+    function SetMailFormToUpdate(tableRowId) {
+        $("#btnAddOrUpdateMail").removeClass("btn-primary");
+        $("#btnAddOrUpdateMail").addClass("btn-info");
+        $("#btnAddOrUpdateMail").text("Güncelle");
+        mailAddOrUpdateBtnType = "UPDATE";
+        mailWillUpdateElement = tableRowId;
+    }
+
+    function UpdateMailInMailList() {
+        let index = mailWillUpdateElement.split('_')[1];
+        mailList[index].Id = $("#ctMailId").val();
+        mailList[index].MailAddress = $("#ctMailAddress").val();
+        mailList[index].Description = $("#ctMailDescription").val();
+    }
+
+    function AddMailInfoToMailList() {
+        let id = parseInt($("#ctMailId").val());
+        let mail = $("#ctMailAddress").val();
+        let desc = $("#ctMailDescription").val();
+        mailList.push({
+            Id: id,
+            CurrentId: parseInt($("#btnSaveContactInfo").attr("data-current-id")),
+            CurrentTypeId: parseInt($("#btnSaveContactInfo").attr("data-current-type-id")),
+            MailAddress: mail,
+            Description: desc
+        });
+    }
+
+    function SetFormElementsFromMailList(index) {
+        $("#ctMailId").val(mailList[index].Id);
+        $("#ctMailAddress").val(mailList[index].MailAddress);
+        $("#ctMailDescription").val(mailList[index].Description);
+    }
+
+    function ClearMailOpForm() {
+        $("#ctMailId").val("0");
+        $("#ctMailAddress").val("");
+        $("#ctMailDescription").val("");
+    }
+</script>
+
+
